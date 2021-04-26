@@ -21,7 +21,7 @@ class Palindrome {
             right++;
         }
         // str.substring, the beginning index, inclusive. the ending index, exclusive.
-        return str.substring(left, right + 1);
+        return str.substring(left + 1, right);
     }
 
     /**
@@ -32,15 +32,12 @@ class Palindrome {
      */
     public String longestPalindrome(String str) {
         if (str == null || str.isEmpty()) return null;
-        String max = null;
+        String max = "";
         for (int i = 0; i < str.length(); i++) {
             String s1 = isPalindrome(str, i, i);
             String s2 = isPalindrome(str, i, i + 1);
-            if (s1.length() >= s2.length()) {
-                max = s1;
-            } else {
-                max = s2;
-            }
+            max = max.length() > s1.length() ? max : s1;
+            max = max.length() > s2.length() ? max : s2;
         }
         return max;
     }
